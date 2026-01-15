@@ -1,0 +1,361 @@
+[
+    {
+        "id": 1,
+        "role_id": 1,
+        "question": "Which React hook is best suited to fetch data when a component mounts?",
+        "options": ["useMemo", "useEffect", "useCallback", "useRef"],
+        "correct_answer": "useEffect"
+    },
+    {
+        "id": 2,
+        "role_id": 1,
+        "question": "What is the main benefit of virtual DOM in frontend frameworks?",
+        "options": ["Faster network requests", "Improved security", "Efficient UI updates", "Better SEO"],
+        "correct_answer": "Efficient UI updates"
+    },
+    {
+        "id": 3,
+        "role_id": 1,
+        "question": "Which CSS property is most suitable for creating responsive layouts?",
+        "options": ["float", "position", "flexbox", "z-index"],
+        "correct_answer": "flexbox"
+    },
+    {
+        "id": 4,
+        "role_id": 1,
+        "question": "Why should keys be unique in React lists?",
+        "options": ["For styling", "For faster rendering", "To help React identify elements", "To avoid memory leaks"],
+        "correct_answer": "To help React identify elements"
+    },
+    {
+        "id": 5,
+        "role_id": 1,
+        "question": "Which event is used to handle controlled form inputs in React?",
+        "options": ["onSubmit", "onClick", "onChange", "onBlur"],
+        "correct_answer": "onChange"
+    },
+
+    {
+        "id": 6,
+        "role_id": 2,
+        "question": "Which HTTP method is idempotent?",
+        "options": ["POST", "PATCH", "PUT", "CONNECT"],
+        "correct_answer": "PUT"
+    },
+    {
+        "id": 7,
+        "role_id": 2,
+        "question": "Why are indexes used in databases?",
+        "options": ["To reduce storage", "To enforce constraints", "To improve query performance", "To normalize tables"],
+        "correct_answer": "To improve query performance"
+    },
+    {
+        "id": 8,
+        "role_id": 2,
+        "question": "What is the main advantage of using JWT for authentication?",
+        "options": ["Encrypted passwords", "Stateless authentication", "Automatic refresh", "Session persistence"],
+        "correct_answer": "Stateless authentication"
+    },
+    {
+        "id": 9,
+        "role_id": 2,
+        "question": "Which status code should be returned when a resource is not found?",
+        "options": ["400", "401", "403", "404"],
+        "correct_answer": "404"
+    },
+    {
+        "id": 10,
+        "role_id": 2,
+        "question": "Which layer handles business logic in a clean backend architecture?",
+        "options": ["Controller", "Service", "Repository", "Middleware"],
+        "correct_answer": "Service"
+    },
+
+    {
+        "id": 11,
+        "role_id": 3,
+        "question": "Which approach helps prevent CORS issues in a full stack application?",
+        "options": ["Client-side validation", "API Gateway", "Reverse Proxy", "State management"],
+        "correct_answer": "Reverse Proxy"
+    },
+    {
+        "id": 12,
+        "role_id": 3,
+        "question": "Which data format is commonly used between frontend and backend?",
+        "options": ["XML", "CSV", "JSON", "Binary"],
+        "correct_answer": "JSON"
+    },
+    {
+        "id": 13,
+        "role_id": 3,
+        "question": "Why should environment variables be used?",
+        "options": ["Improve performance", "Store sensitive configs", "Increase build speed", "Enable caching"],
+        "correct_answer": "Store sensitive configs"
+    },
+    {
+        "id": 14,
+        "role_id": 3,
+        "question": "Which HTTP status code indicates a successful resource creation?",
+        "options": ["200", "201", "204", "302"],
+        "correct_answer": "201"
+    },
+    {
+        "id": 15,
+        "role_id": 3,
+        "question": "What is the best way to handle large file uploads?",
+        "options": ["Base64 encoding", "Multipart streams", "Cookies", "LocalStorage"],
+        "correct_answer": "Multipart streams"
+    },
+
+    {
+        "id": 16,
+        "role_id": 4,
+        "question": "Which SQL clause is used to group rows?",
+        "options": ["WHERE", "GROUP BY", "ORDER BY", "HAVING"],
+        "correct_answer": "GROUP BY"
+    },
+    {
+        "id": 17,
+        "role_id": 4,
+        "question": "Which metric best measures data variability?",
+        "options": ["Mean", "Median", "Variance", "Mode"],
+        "correct_answer": "Variance"
+    },
+    {
+        "id": 18,
+        "role_id": 4,
+        "question": "What does ETL stand for?",
+        "options": ["Evaluate Transform Load", "Extract Transform Load", "Encode Transfer Load", "Extract Transfer Log"],
+        "correct_answer": "Extract Transform Load"
+    },
+    {
+        "id": 19,
+        "role_id": 4,
+        "question": "Which chart is best for trend analysis?",
+        "options": ["Pie", "Bar", "Line", "Scatter"],
+        "correct_answer": "Line"
+    },
+    {
+        "id": 20,
+        "role_id": 4,
+        "question": "What does normalization reduce in databases?",
+        "options": ["Query time", "Redundancy", "Indexes", "Rows"],
+        "correct_answer": "Redundancy"
+    },
+
+    {
+        "id": 21,
+        "role_id": 5,
+        "question": "What is the main purpose of Docker?",
+        "options": ["Virtualization", "Containerization", "Load balancing", "Monitoring"],
+        "correct_answer": "Containerization"
+    },
+    {
+        "id": 22,
+        "role_id": 5,
+        "question": "Which tool is used for container orchestration?",
+        "options": ["Docker", "Nginx", "Kubernetes", "Jenkins"],
+        "correct_answer": "Kubernetes"
+    },
+    {
+        "id": 23,
+        "role_id": 5,
+        "question": "Why is CI/CD important?",
+        "options": ["Faster UI", "Automated testing & deployment", "Reduced server cost", "Better caching"],
+        "correct_answer": "Automated testing & deployment"
+    },
+    {
+        "id": 24,
+        "role_id": 5,
+        "question": "Which file defines Docker image instructions?",
+        "options": ["docker.json", "container.yml", "Dockerfile", "image.lock"],
+        "correct_answer": "Dockerfile"
+    },
+    {
+        "id": 25,
+        "role_id": 5,
+        "question": "Which metric indicates server health?",
+        "options": ["CPU usage", "Commit history", "Code coverage", "Build time"],
+        "correct_answer": "CPU usage"
+    },
+
+    {
+        "id": 26,
+        "role_id": 1,
+        "question": "What improves frontend performance most?",
+        "options": ["Larger images", "Code splitting", "Inline styles", "More libraries"],
+        "correct_answer": "Code splitting"
+    },
+    {
+        "id": 27,
+        "role_id": 2,
+        "question": "Which database is best for hierarchical data?",
+        "options": ["MySQL", "PostgreSQL", "MongoDB", "SQLite"],
+        "correct_answer": "MongoDB"
+    },
+    {
+        "id": 28,
+        "role_id": 3,
+        "question": "Which strategy improves backend scalability?",
+        "options": ["Monolith", "Horizontal scaling", "Hardcoding configs", "Single server"],
+        "correct_answer": "Horizontal scaling"
+    },
+    {
+        "id": 29,
+        "role_id": 4,
+        "question": "Which SQL function returns number of rows?",
+        "options": ["SUM()", "COUNT()", "AVG()", "MAX()"],
+        "correct_answer": "COUNT()"
+    },
+    {
+        "id": 30,
+        "role_id": 5,
+        "question": "Which tool is commonly used for infrastructure as code?",
+        "options": ["Git", "Terraform", "Docker", "Postman"],
+        "correct_answer": "Terraform"
+    },
+
+    {
+        "id": 31,
+        "role_id": 1,
+        "question": "Why should debounce be used in search inputs?",
+        "options": ["Better UI", "Reduce API calls", "Improve CSS", "Increase memory"],
+        "correct_answer": "Reduce API calls"
+    },
+    {
+        "id": 32,
+        "role_id": 2,
+        "question": "Which practice prevents SQL injection?",
+        "options": ["Indexes", "Prepared statements", "Caching", "Joins"],
+        "correct_answer": "Prepared statements"
+    },
+    {
+        "id": 33,
+        "role_id": 3,
+        "question": "Which HTTP header is used for authentication?",
+        "options": ["Content-Type", "Authorization", "Accept", "Cache-Control"],
+        "correct_answer": "Authorization"
+    },
+    {
+        "id": 34,
+        "role_id": 4,
+        "question": "Which measure detects outliers?",
+        "options": ["Mean", "Standard Deviation", "Median", "Mode"],
+        "correct_answer": "Standard Deviation"
+    },
+    {
+        "id": 35,
+        "role_id": 5,
+        "question": "What does rolling deployment ensure?",
+        "options": ["Zero downtime", "Faster build", "Lower cost", "More security"],
+        "correct_answer": "Zero downtime"
+    },
+
+    {
+        "id": 36,
+        "role_id": 1,
+        "question": "Which tool helps manage global state in React?",
+        "options": ["Axios", "Redux", "Webpack", "Babel"],
+        "correct_answer": "Redux"
+    },
+    {
+        "id": 37,
+        "role_id": 2,
+        "question": "Which cache strategy is best for frequently read data?",
+        "options": ["Write-through", "Read-through", "Write-back", "No cache"],
+        "correct_answer": "Read-through"
+    },
+    {
+        "id": 38,
+        "role_id": 3,
+        "question": "What improves API reliability?",
+        "options": ["Retries & timeouts", "Long responses", "Hardcoded logic", "Single endpoint"],
+        "correct_answer": "Retries & timeouts"
+    },
+    {
+        "id": 39,
+        "role_id": 4,
+        "question": "Which join returns only matching rows?",
+        "options": ["LEFT JOIN", "RIGHT JOIN", "INNER JOIN", "FULL JOIN"],
+        "correct_answer": "INNER JOIN"
+    },
+    {
+        "id": 40,
+        "role_id": 5,
+        "question": "Which component distributes traffic evenly?",
+        "options": ["Firewall", "Load Balancer", "Cache", "Proxy"],
+        "correct_answer": "Load Balancer"
+    },
+
+    {
+        "id": 41,
+        "role_id": 1,
+        "question": "Which technique improves first contentful paint?",
+        "options": ["Lazy loading", "Blocking scripts", "Large bundles", "Inline images"],
+        "correct_answer": "Lazy loading"
+    },
+    {
+        "id": 42,
+        "role_id": 2,
+        "question": "Which pattern separates read and write operations?",
+        "options": ["MVC", "CQRS", "Singleton", "Factory"],
+        "correct_answer": "CQRS"
+    },
+    {
+        "id": 43,
+        "role_id": 3,
+        "question": "Which architecture improves independent deployment?",
+        "options": ["Monolith", "Microservices", "Layered", "MVC"],
+        "correct_answer": "Microservices"
+    },
+    {
+        "id": 44,
+        "role_id": 4,
+        "question": "Which KPI measures business growth?",
+        "options": ["Latency", "Conversion Rate", "CPU usage", "Memory"],
+        "correct_answer": "Conversion Rate"
+    },
+    {
+        "id": 45,
+        "role_id": 5,
+        "question": "Which tool monitors logs centrally?",
+        "options": ["ELK Stack", "Docker", "Git", "Postman"],
+        "correct_answer": "ELK Stack"
+    },
+
+    {
+        "id": 46,
+        "role_id": 1,
+        "question": "Which browser API stores small client-side data?",
+        "options": ["Cookies", "SessionStorage", "LocalStorage", "IndexedDB"],
+        "correct_answer": "LocalStorage"
+    },
+    {
+        "id": 47,
+        "role_id": 2,
+        "question": "Which strategy ensures data consistency across services?",
+        "options": ["Saga pattern", "Caching", "Replication", "Sharding"],
+        "correct_answer": "Saga pattern"
+    },
+    {
+        "id": 48,
+        "role_id": 3,
+        "question": "Which tool is commonly used for API testing?",
+        "options": ["Figma", "Postman", "Jira", "Slack"],
+        "correct_answer": "Postman"
+    },
+    {
+        "id": 49,
+        "role_id": 4,
+        "question": "Which visualization best shows category comparison?",
+        "options": ["Line chart", "Bar chart", "Scatter plot", "Heatmap"],
+        "correct_answer": "Bar chart"
+    },
+    {
+        "id": 50,
+        "role_id": 5,
+        "question": "Which practice improves system fault tolerance?",
+        "options": ["Single server", "Redundancy", "Hardcoding", "Manual deploys"],
+        "correct_answer": "Redundancy"
+    }
+]

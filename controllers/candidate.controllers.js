@@ -85,10 +85,11 @@ export const handleRegister = async (req, res) => {
 
 export const handleLogout = async (req, res) => {
     try {
-        res.json({ message: "Candidate logged out successfully" });
+        res.clearCookie("token");
+        res.json({ success: true, message: "Candidate logged out successfully" });
     } catch (error) {
         console.error("Error logging out candidate:", error);
-        res.status(500).json({ error: "Failed to log out candidate" });
+        res.status(500).json({ success: false, error: "Failed to log out candidate" });
     }
 };
 export const handleGetCandidates = async (req, res) => {
@@ -105,10 +106,10 @@ export const handleGetCandidates = async (req, res) => {
         const [candidates] = await pool.query(
             "SELECT * FROM candidates"
         );
-        res.json({ message: "Candidates fetched successfully", candidates });
+        res.json({ success: true, message: "Candidates fetched successfully", candidates });
     } catch (error) {
         console.error("Error fetching candidates:", error);
-        res.status(500).json({ error: "Failed to fetch candidates" });
+        res.status(500).json({ success: false, error: "Failed to fetch candidates" });
     }
 };
 export const handleGetCandidate = async (req, res) => {
@@ -118,25 +119,100 @@ export const handleGetCandidate = async (req, res) => {
             "SELECT * FROM candidates WHERE id = ? LIMIT 1",
             [id]
         );
-        res.json({ message: "Candidate fetched successfully", candidate });
+        res.json({ success: true, message: "Candidate fetched successfully", candidate });
     } catch (error) {
         console.error("Error fetching candidate:", error);
-        res.status(500).json({ error: "Failed to fetch candidate" });
+        res.status(500).json({ success: false, error: "Failed to fetch candidate" });
     }
 };
 export const handleUpdateCandidate = async (req, res) => {
     try {
-        res.json({ message: "Candidate updated successfully" });
+        const { id } = req.user;
+        const [candidate] = await pool.query("UPDATE candidates SET ? WHERE id = ?", [req.body, id]);
+        if (candidate.affectedRows === 0) {
+            return res.status(404).json({ success: false, error: "Candidate not found" });
+        }
+        res.json({ success: true, message: "Candidate updated successfully" });
     } catch (error) {
         console.error("Error updating candidate:", error);
-        res.status(500).json({ error: "Failed to update candidate" });
+        res.status(500).json({ success: false, error: "Failed to update candidate" });
     }
 };
 export const handleDeleteCandidate = async (req, res) => {
     try {
-        res.json({ message: "Candidate deleted successfully" });
+        const { id } = req.query;
+        if (!id) {
+            return res.status(401).json({
+                success: false,
+                message: "Candidate not found"
+            });
+        }
+        const [candidate] = await pool.query(
+            "DELETE FROM candidates WHERE id = ? LIMIT 1",
+            [id]
+        );
+        if (candidate.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "Candidate not found"
+            });
+        }
+        res.json({ success: true, message: "Candidate deleted successfully" });
     } catch (error) {
         console.error("Error deleting candidate:", error);
-        res.status(500).json({ error: "Failed to delete candidate" });
+        res.status(500).json({ success: false, error: "Failed to delete candidate" });
     }
 };
+export const handleRuleBreak = async (req, res) => {
+    try {
+        const { id } = req.user;
+        const { violation_reason, test_format } = req.body;
+
+        // 1️⃣ Insert into rule_break table
+        await pool.query(
+            `INSERT INTO rule_break (candidate_id, violation_reason, test_format)
+             VALUES (?, ?, ?)`,
+            [id, violation_reason, test_format]
+        );
+
+        // 2️⃣ Increase warn count
+        await pool.query(
+            `UPDATE candidates
+             SET warn = warn + 1
+             WHERE id = ?`,
+            [id]
+
+        );
+
+        // 3️⃣ Fetch updated warn count
+        const [[candidate]] = await pool.query(
+            `SELECT warn FROM candidates WHERE id = ?`,
+            [id]
+        );
+
+        if (!candidate) {
+            return res.status(404).json({
+                success: false,
+                error: "Candidate not found"
+            });
+        }
+
+        // 4️⃣ Decide block status
+        const block_candidate = candidate.warn >= 2;
+
+        res.json({
+            success: true,
+            message: "Rule break recorded successfully",
+            warn_count: candidate.warn,
+            block_candidate
+        });
+
+    } catch (error) {
+        console.error("Error handling rule break:", error);
+        res.status(500).json({
+            success: false,
+            error: "Failed to handle rule break"
+        });
+    }
+};
+
