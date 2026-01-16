@@ -82,7 +82,6 @@ export const handleRegister = async (req, res) => {
         });
     }
 };
-
 export const handleLogout = async (req, res) => {
     try {
         res.clearCookie("token");

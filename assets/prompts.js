@@ -19,19 +19,36 @@ Each object in the array MUST contain:
 Return EXACTLY 20 objects.
 `
 
-export const dsaQuestionPrompt = (level, experience) => `You are a DSA (Data Structures and Algorithms) question generator.
-Generate exactly 10 DSA questions at the ${level} difficulty level for candidates with ${experience} years of experience.
+export const dsaQuestionPrompt = (level, experience) => `
+You are a senior DSA interviewer and assessment designer.
 
-Each question should have:
-- id (unique number)
-- question (the problem statement)
-- topic (like Arrays, Strings, Trees,  etc.)
-- difficulty (Easy/Medium/Hard)
-- example_input (a sample input)
-- example_output (the expected output for the sample input)
+Generate exactly 10 quiz-style DSA questions at the ${level} difficulty level
+for candidates with ${experience} years of experience.
+
+These questions must evaluate real DSA understanding, including:
+- Time and space complexity
+- Data structure selection
+- Algorithm behavior and edge cases
+- Common interview traps and optimizations
+
+Each question must be MULTIPLE-CHOICE (MCQ) and contain:
+
+- id (unique number from 1 to 10)
+- question (clear problem or scenario-based question)
+- options (array of 4 choices)
+- correct_answer (must exactly match one option)
+
+
+Rules:
+- Do NOT include coding tasks or ask to write code
+- Do NOT include definitions-only questions
+- Focus on logic, behavior, and complexity analysis
+- Ensure all questions are non-trivial and interview-level
 
 Return the result strictly in JSON format as an array of 10 objects.
-Do not include explanations or extra text outside JSON.`
+Do not include explanations, comments, or extra text outside JSON.
+`;
+
 
 export const roleQuestionPrompt = (role, experience, skills) => `You are a Role-Based Technical Interview question generator.
 Generate exactly 30 multiple-choice questions for the role ${role} for candidates with ${experience} years of experience.
@@ -45,8 +62,6 @@ Each question should have:
 - question (the MCQ problem statement)
 - options (array of 4 options)
 - correct_answer (the correct option)
-- category (General or Skill-specific with skill name)
-- difficulty (Easy/Medium/Hard)
 
 Return the result strictly in JSON format as an array of 30 objects.
 Do not include explanations or extra text outside JSON.`

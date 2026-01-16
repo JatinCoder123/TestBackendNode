@@ -12,6 +12,6 @@ app.listen(PORT, () => {
         await pool.query("SELECT 1");
         console.log("✅ MySQL connected successfully");
     } catch (error) {
-        console.error("❌ MySQL connection failed:", error.message);
+        console.error("❌ MySQL connection failed:", error);
     }
 })();

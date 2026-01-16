@@ -2,6 +2,8 @@ import axios from "axios";
 
 export const generateQuestions = async (prompt) => {
     try {
+        throw Error("AI service not implemented");
+
         const seed = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
         const response = await axios.post(
