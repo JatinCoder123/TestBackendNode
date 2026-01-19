@@ -118,7 +118,7 @@ export const handleGetCandidate = async (req, res) => {
             "SELECT * FROM candidates WHERE id = ? LIMIT 1",
             [id]
         );
-        res.json({ success: true, message: "Candidate fetched successfully", candidate });
+        res.json({ success: true, message: "Candidate fetched successfully", candidate: candidate[0] });
     } catch (error) {
         console.error("Error fetching candidate:", error);
         res.status(500).json({ success: false, error: "Failed to fetch candidate" });

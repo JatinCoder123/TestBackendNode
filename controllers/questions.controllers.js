@@ -147,7 +147,7 @@ export const getCurrentRoundQuestions = async (req, res) => {
                 }
             }
         }
-        res.status(200).json({ success: true, data: questions });
+        res.status(200).json({ success: true, questions });
     } catch (error) {
         console.log(error);
         res.status(500).json({ success: false, message: error.message });
