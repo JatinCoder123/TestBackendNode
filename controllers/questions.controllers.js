@@ -137,6 +137,7 @@ export const getCurrentRoundQuestions = async (req, res) => {
                     questions = await generateQuestions(dsaQuestionPrompt(dsa_level, experience))
                 }
             } catch (error) {
+                console.log(error.message)
                 if (current_round == 2) {
                     const roleQuestions = await getSavedQuestions(role_id)
                     questions = getShuffledQuestion(roleQuestions, 20)

@@ -2,12 +2,10 @@ import axios from "axios";
 
 export const generateQuestions = async (prompt) => {
     try {
-        throw Error("AI service not implemented");
-
         const seed = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
         const response = await axios.post(
-            process.env.GPT4_API_URL,
+            process.env.GPT4_API_URL, // ✅ KEEP chat/completions
             {
                 messages: [
                     {
@@ -26,8 +24,7 @@ Randomness seed: ${seed}
                     }
                 ],
                 temperature: 0.85,
-                top_p: 0.9,
-                max_tokens: 5000
+                max_completion_tokens: 5000   // ✅ SAME AS PHP
             },
             {
                 headers: {
@@ -37,30 +34,34 @@ Randomness seed: ${seed}
             }
         );
 
+        /* ✅ SAME RESPONSE STRUCTURE AS PHP */
         const rawOutput = response.data.choices[0].message.content;
 
         const parsedOutput = safeJsonParse(rawOutput);
 
-        return parsedOutput;
+        /* ✅ FIX FIELD MISMATCH */
+        const normalized = parsedOutput.map((q) => ({
+            ...q,
+            answer: q.correct_answer
+        }));
+
+        return normalized;
 
     } catch (error) {
+        console.error("AI ERROR:", error?.response?.data || error.message);
         throw error;
     }
 };
+
 function safeJsonParse(text) {
     try {
         return JSON.parse(text);
     } catch (err) {
-        // Fallback: extract JSON array or object
         const arrayMatch = text.match(/\[[\s\S]*\]/);
-        if (arrayMatch) {
-            return JSON.parse(arrayMatch[0]);
-        }
+        if (arrayMatch) return JSON.parse(arrayMatch[0]);
 
         const objectMatch = text.match(/\{[\s\S]*\}/);
-        if (objectMatch) {
-            return JSON.parse(objectMatch[0]);
-        }
+        if (objectMatch) return JSON.parse(objectMatch[0]);
 
         throw new Error("Invalid JSON returned by AI");
     }

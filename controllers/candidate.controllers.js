@@ -14,7 +14,7 @@ export const handleRegister = async (req, res) => {
         } = req.body;
 
         /* 1️⃣ VALIDATION */
-        if (!email || !first_name || !role_id || !experience || !skills || !is_dsa) {
+        if (!email || !first_name || !role_id || !skills) {
             return res.status(400).json({
                 success: false,
                 error: "All fields except lastName are required"
@@ -127,11 +127,15 @@ export const handleGetCandidate = async (req, res) => {
 export const handleUpdateCandidate = async (req, res) => {
     try {
         const { id } = req.user;
-        const [candidate] = await pool.query("UPDATE candidates SET ? WHERE id = ?", [req.body, id]);
+        let [candidate] = await pool.query("UPDATE candidates SET ? WHERE id = ?", [req.body, id]);
         if (candidate.affectedRows === 0) {
             return res.status(404).json({ success: false, error: "Candidate not found" });
         }
-        res.json({ success: true, message: "Candidate updated successfully" });
+        [candidate] = await pool.query(
+            "SELECT * FROM candidates WHERE id = ? LIMIT 1",
+            [id]
+        );
+        res.json({ success: true, message: "Candidate updated successfully", candidate: candidate[0] });
     } catch (error) {
         console.error("Error updating candidate:", error);
         res.status(500).json({ success: false, error: "Failed to update candidate" });
