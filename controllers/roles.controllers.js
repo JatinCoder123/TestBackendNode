@@ -12,26 +12,82 @@ export const handleGetRoles = async (req, res) => {
 export const handleCreateRole = async (req, res) => {
     try {
         const { title, dsa_level, role_skills } = req.body;
-        const [role] = await pool.query("INSERT INTO roles (title, dsa_level, role_skills) VALUES (?, ?, ?)", [title, dsa_level, role_skills]);
-        if (role.affectedRows === 0) {
-            return res.status(404).json({ success: false, error: "Role not found" });
+
+        // ✅ Validation
+        if (!title || !role_skills) {
+            return res.status(400).json({
+                success: false,
+                error: "Title and role_skills are required",
+            });
         }
-        res.json({ success: true, message: "Role created successfully" });
+
+        // ✅ Convert array → JSON string
+        const skillsJSON = JSON.stringify(role_skills);
+
+        const [result] = await pool.query(
+            "INSERT INTO roles (title, dsa_level, role_skills) VALUES (?, ?, ?)",
+            [title, dsa_level || null, skillsJSON]
+        );
+
+        res.json({
+            success: true,
+            message: "Role created successfully",
+            roleId: result.insertId,
+        });
+
     } catch (error) {
         console.error("Error creating role:", error);
-        res.status(500).json({ success: false, error: "Failed to create role" });
+        res.status(500).json({
+            success: false,
+            error: "Failed to create role",
+        });
     }
 };
 export const handleUpdateRole = async (req, res) => {
     try {
-        const [role] = await pool.query("UPDATE roles SET ? WHERE id = ?", [req.body, req.query.id]);
-        if (role.affectedRows === 0) {
-            return res.status(404).json({ success: false, error: "Role not found" });
+        const { id } = req.query; // ✅ FIXED (not query)
+        const { title, dsa_level, role_skills } = req.body;
+
+        if (!id) {
+            return res.status(400).json({
+                success: false,
+                error: "Role ID is required",
+            });
         }
-        res.json({ success: true, message: "Role updated successfully" });
+
+        // ✅ Build dynamic update object safely
+        const updateData = {};
+
+        if (title !== undefined) updateData.title = title;
+        if (dsa_level !== undefined) updateData.dsa_level = dsa_level;
+
+        if (role_skills !== undefined) {
+            updateData.role_skills = JSON.stringify(role_skills); // 🔥 IMPORTANT
+        }
+
+        const [result] = await pool.query(
+            "UPDATE roles SET ? WHERE id = ?",
+            [updateData, id]
+        );
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({
+                success: false,
+                error: "Role not found",
+            });
+        }
+
+        res.json({
+            success: true,
+            message: "Role updated successfully",
+        });
+
     } catch (error) {
         console.error("Error updating role:", error);
-        res.status(500).json({ success: false, error: "Failed to update role" });
+        res.status(500).json({
+            success: false,
+            error: "Failed to update role",
+        });
     }
 };
 export const handleDeleteRole = async (req, res) => {

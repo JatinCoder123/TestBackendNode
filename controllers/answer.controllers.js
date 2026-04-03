@@ -5,14 +5,6 @@ export const handleSendAnswer = async (req, res) => {
         const { id: candidate_id } = req.user;
         const { round, answers } = req.body;
 
-        // ✅ Validation
-        if (!round || !["round1", "round2", "round3"].includes(round)) {
-            return res.status(400).json({
-                success: false,
-                message: "Valid round is required (round1, round2, round3)"
-            });
-        }
-
         if (!answers || !Array.isArray(answers)) {
             return res.status(400).json({
                 success: false,
